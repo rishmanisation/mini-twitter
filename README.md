@@ -37,11 +37,11 @@ Usage: http://localhost:8080/option2
 
 1. Download the project. Open a terminal window from the root directory of the project. 
 
-2. Run the following commands IN ORDER:
-  2.1 gradle build
-  2.2 gradle wrapper –gradle-version 4.0
-  2.3 ./gradlew build
-  2.4 java -jar build/libs/mini-twitter-v1-0.0.1-SNAPSHOT.jar
+2. Run the following commands IN ORDER:  
+    * gradle build  
+    * gradle wrapper –gradle-version 4.0  
+    * ./gradlew build
+    * java -jar build/libs/mini-twitter-v1-0.0.1-SNAPSHOT.jar
 
 *EASY WAY TO RUN*: Just run ./go
 
