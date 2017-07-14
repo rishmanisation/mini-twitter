@@ -1,7 +1,7 @@
 # mini-twitter
 Implementation of the backend of a mini-messaging service inspired by Twitter. The service has a RESTful API and uses Spring Boot.
 
-**MINI TWITTER BACKEND**
+**MINI TWITTER BACKEND**  
 *by Rishabh Ananthan*
 
 This project is the backend of a mini-messaging service inspired by Twitter. It is a RESTful Web Application developed from a Spring Boot project and consists of the following endpoints:
@@ -33,7 +33,7 @@ Usage: http://localhost:8080/people/unfollow/id (id is the integer value ranging
 9. GET: List of all users and most popular follower  
 Usage: http://localhost:8080/option2 
 
-***INSTALLATION***
+***INSTALLATION AND EXECUTION***
 
 1. Download the project. Open a terminal window from the root directory of the project. 
 
