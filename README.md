@@ -48,3 +48,11 @@ Usage: http://localhost:8080/option2
 3. Once the Spring boot application launches, open Postman. Select Basic authentication. Username is ‘user’. For password, use the  default password that will show up in the terminal window (NOTE: This will change on every execution). 
 
 4. Once username and password have been entered, each endpoint can be run and the desired output will be obtained.
+
+***WORK IN PROGRESS (IN ORDER OF PRIORITY)***
+
+1. Improved login with custom passwords.  
+
+2. Adding an endpoint that returns the current user's "shortest distance" to some other user. The shortest distance is defined as the number of hops needed to reach a user through the users you are following (not through your followers; direction matters). For example, if you follow user B, your shortest distance to B is 1. If you do not follow user B, but you do follow user C who follows user B, your shortest distance to B is 2.  
+
+3. Implementing a front-end for the service (currently on the back burner).
