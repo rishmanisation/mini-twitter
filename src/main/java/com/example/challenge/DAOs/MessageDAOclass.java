@@ -1,5 +1,8 @@
-//Class implementing MessageDAO
-//Rishabh Ananthan
+/**
+* MessageDAOclass.java: The class that implements the MessageDAO interface.
+* @author Rishabh Ananthan
+* @version 1.0
+*/
 
 package com.example.challenge.DAOs;
 
@@ -21,15 +24,24 @@ import com.example.challenge.ResourceReps.Messages;
 
 @Repository
 public class MessageDAOclass implements MessageDAO {
-	private DataSource myDataSource;
-	private NamedParameterJdbcTemplate myJDBCTemplate;
+	private DataSource myDataSource; //DataSource instance
+	private NamedParameterJdbcTemplate myJDBCTemplate; //Database instance
 
+	/**
+	* Constructor Function to initialize beans
+	* @author Rishabh Ananthan
+	* @param myDataSource Parameter to initialize the datasource.
+	*/
 	@Autowired
 	public MessageDAOclass(DataSource myDataSource) {
 		this.myDataSource = myDataSource;
 		this.myJDBCTemplate = new NamedParameterJdbcTemplate(myDataSource);
 	}
 
+	/**
+	* RowMapper that maps data from the Messages SQL table into Messages objects.
+	* @author Rishabh Ananthan
+	*/
 	private RowMapper<Messages> myMessageMapper = (rs,rowNum) -> {
 		Messages m = new Messages();
 		m.setUserId(rs.getInt("person_id"));
@@ -37,7 +49,12 @@ public class MessageDAOclass implements MessageDAO {
 		return m;
 	};
 
-	//Function to add a new message
+	/**
+	* Function that allows the current user to add a new message.
+	* @author Rishabh Ananthan
+	* @param content The content of the message to be added.
+	* @return Number of rows affected if success, 0 otherwise.
+	*/
 	@Override
 	public int addMessage(String content) {
 		int user_id = getId();
@@ -53,7 +70,12 @@ public class MessageDAOclass implements MessageDAO {
 		}
 	}
 
-	//Function to generate messages written by the user and his/her followers
+	/**
+	* Function that lists all the messages of the current user and his/her
+	* followers.
+	* @author Rishabh Ananthan
+	* @return List of all messages or current user and his/her followers.
+	*/
 	@Override
 	public List<Messages> getUserMessages() {
 		int user_id = getId();
@@ -64,7 +86,13 @@ public class MessageDAOclass implements MessageDAO {
 		return result;
 	}
 
-	//Function that allows the user to search by keyword
+	/**
+	* Function that searches user messages by keyword.
+	* @author Rishabh Ananthan
+	* @param keyword The word to filter messages by.
+	* @return List of all messages or current user and his/her followers that
+	* contain the keyword.
+	*/
 	@Override
 	public List<Messages> searchUserMessages(String keyword) {
 		int user_id = getId();
@@ -75,12 +103,17 @@ public class MessageDAOclass implements MessageDAO {
 		return result;
 	}
 
+	/**
+	* Function that returns the ID of the current user.
+	* @author Rishabh Ananthan
+	* @return ID of current user.
+	*/
 	public int getId() {
 		String aux;
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		if (principal instanceof UserDetails) 
-			aux = ((UserDetails)principal).getUsername(); 
-		else 
+		if (principal instanceof UserDetails)
+			aux = ((UserDetails)principal).getUsername();
+		else
 			aux = principal.toString();
 		Map<String,Object> parameters = new HashMap<String,Object>();
 		parameters.put("handle",aux);

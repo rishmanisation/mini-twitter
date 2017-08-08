@@ -1,5 +1,11 @@
-//Message controller class
-//Rishabh Ananthan
+/**
+* MessageController.java: Message Controller class
+* This is one of the two controllers that the web application uses. The functions
+* in this controller are related to the messages sent by users. Methods are
+* either HTTP GET or POST and the output is in JSON format.
+* @author Rishabh Ananthan
+* @version 1.0
+*/
 
 package com.example.challenge.Controllers;
 
@@ -22,14 +28,27 @@ import java.util.List;
 @RestController
 public class MessageController {
 
+	// Instance of MessageDAO
 	private MessageDAO myMessageDAO;
 
+	/**
+	* Constructor Function to initialize the beans
+	* @author Rishabh Ananthan
+	* @param myMessageDAO DAO
+	*/
 	@Autowired
 	public MessageController(MessageDAO myMessageDAO) {
 		this.myMessageDAO = myMessageDAO;
 	}
 
-	//Function to write a new message
+	/**
+	* Function to add a new user message
+	* @author Rishabh Ananthan
+	* @param content String containing the message content. This is also a
+	* PathVariable. To add a message, append /message/content="message" to the
+	* localhost URL, where "message" is the content of your message.
+	* @return ResponseEntity JSON object
+	*/
 	@RequestMapping(value="/message/content={content}", method=RequestMethod.POST, produces="application/json")
 	@ResponseBody
 	public ResponseEntity writeNewMessage(@PathVariable String content) {
@@ -40,14 +59,23 @@ public class MessageController {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"message\":\"Error!\"}");
 	}
 
-	//Function to publish messages by user and followers
+	/**
+	* Function to view the messages of the current user and his/her followers
+	* @author Rishabh Ananthan
+	* @return List of messages
+	*/
 	@RequestMapping(value="/message", method=RequestMethod.GET, produces="application/json")
 	@ResponseBody
 	public List<Messages> userTweets() {
 		return myMessageDAO.getUserMessages();
 	}
 
-	//Search parameter
+	/**
+	* Function to filter user messages based on a keyword
+	* @author Rishabh Ananthan
+	* @param keyword String containing the keyword for filtering by.
+	* @return Filtered list of messages.
+	*/
 	@RequestMapping(value="/message/search={keyword}", method=RequestMethod.GET, produces="application/json")
 	@ResponseBody
 	public List<Messages> searchUserTweets(@PathVariable String keyword) {

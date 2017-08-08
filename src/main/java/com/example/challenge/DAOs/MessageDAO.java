@@ -1,3 +1,11 @@
+/**
+* MessageDAO.java: Interface implementing the Data Access Object that contains
+* functionality related to user messages. Individual function documentation is
+* in MessageDAOclass.java.
+* @author Rishabh Ananthan
+* @version 1.0
+*/
+
 package com.example.challenge.DAOs;
 
 import java.util.List;

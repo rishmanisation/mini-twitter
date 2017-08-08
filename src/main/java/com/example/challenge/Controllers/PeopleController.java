@@ -1,5 +1,11 @@
-//People Controller class
-//Rishabh Ananthan
+/**
+* PeopleController.java: People Controller class.
+* This is one of two controllers used by the web application. The functions
+* implemented are related to the users. Methods are either HTTP GET or POST
+* and the output is in JSON format.
+* @author Rishabh Ananthan
+* @version 1.0
+*/
 
 package com.example.challenge.Controllers;
 
@@ -23,14 +29,25 @@ import java.util.List;
 @RestController
 public class PeopleController {
 
+	// Instance of PeopleDAO
 	private PeopleDAO myPeopleDAO;
 
+	/**
+	* Constructor function to initialize the beans
+	* @author Rishabh Ananthan
+	* @param myPeopleDAO DAO
+	*/
 	@Autowired
 	public PeopleController(PeopleDAO myPeopleDAO) {
 		this.myPeopleDAO = myPeopleDAO;
 	}
 
-	//Follow User
+	/**
+	* Function that allows current user to follow another user.
+	* @author Rishabh Ananthan
+	* @param follower_id ID of the user to be followed. This is a path variable.
+	* @return JSON object
+	*/
 	@RequestMapping(value="/people/follow/{follower_id}", method=RequestMethod.POST, produces="application/json")
 	@ResponseBody
 	public ResponseEntity followUser(@PathVariable int follower_id) {
@@ -41,7 +58,12 @@ public class PeopleController {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"message\":\"Error!\"}");
 	}
 
-	//Unfollow user
+	/**
+	* Function that allows the current user to unfollow another user.
+	* @author Rishabh Ananthan
+	* @param follower_id ID of the user to be unfollowed. This is a path variable.
+	* @return JSON object
+	*/
 	@RequestMapping(value="/people/unfollow/{follower_id}", method=RequestMethod.POST, produces="application/json")
 	@ResponseBody
 	public ResponseEntity unfollowUser(@PathVariable int follower_id) {
@@ -52,31 +74,50 @@ public class PeopleController {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"message\":\"Error!\"}");
 	}
 
-	//List all users
+	/**
+	* Function that lists all the available users.
+	* @author Rishabh Ananthan
+	* @return List of all users.
+	*/
 	@RequestMapping(value="/people", method=RequestMethod.GET, produces="application/json")
 	@ResponseBody
 	public List<People> listUsers() {
 		return myPeopleDAO.listAllUsers();
 	}
 
-	//List everybody following a user
+	/**
+	* Function that lists all the followers of the current user.
+	* @author Rishabh Ananthan
+	* @return List of all followers.
+	*/
 	@RequestMapping(value="/followers", method=RequestMethod.GET, produces="application/json")
 	@ResponseBody
 	public List<Followers> listFollowers() {
 		return myPeopleDAO.listAllFollowers();
 	}
 
-	//List everybody a user is following
+	/**
+	* Function that lists all the people the current user is following.
+	* @author Rishabh Ananthan
+	* @return List of all users the current user is following.
+	*/
 	@RequestMapping(value="/following", method=RequestMethod.GET, produces="application/json")
 	@ResponseBody
 	public List<Followers> listFollowing() {
 		return myPeopleDAO.listAllFollowing();
 	}
 
-	//List users along with their most popular follower (arbitary selection in case of a tie)
+	/**
+	* Function that lists all users along with their most popular follower. The
+	* most popular follower is a person who the user follows, that has the most
+	* followers. In case two or more people have the highest number of followers,
+	* an arbitrary selection is made.
+	* @author Rishabh Ananthan
+	* @return List of users along with their most popular follower
+	*/
 	@RequestMapping(value="/option2", method=RequestMethod.GET, produces="application/json")
 	@ResponseBody
 	public List<Followers> listUsersWithTheirMostPopularFollower() {
 		return myPeopleDAO.listUsersWithMostPopularFollower();
-	} 
+	}
 }

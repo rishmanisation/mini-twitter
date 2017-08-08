@@ -1,3 +1,12 @@
+/**
+* PeopleDAO.java: Interface implementing the Data Access Object that contains
+* functionality related to users. Individual function documentation is
+* in PeopleDAOclass.java.
+* @author Rishabh Ananthan
+* @version 1.0
+*/
+
+
 package com.example.challenge.DAOs;
 
 import java.util.List;
